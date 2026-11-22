@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gate Pass Approval | LogiTrek</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/static/css/style.css" rel="stylesheet">
+</head>
+<body class="app-shell">
+  <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
+    <div class="nav-inner">
+      <a class="navbar-brand" href="/">LogiTrek</a>
+      <div class="d-flex gap-2 flex-wrap align-items-center">
+        <span id="whoami" class="small text-muted"></span>
+        <a class="btn btn-outline-secondary btn-sm" href="/user_panel">Bookings</a>
+        <button id="logoutBtn" class="btn btn-outline-primary btn-sm d-none" type="button">Sign out</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="page-wrap wide">
+    <div id="loginView" class="login-split">
+      <div>
+        <p class="eyebrow">Hostel and department desk</p>
+        <h1 class="h2 mb-2">Approve every truck that asked for a gate pass.</h1>
+        <p>Sign in as the gate office. Pending, approved, and rejected requests from every hostel and department are on this desk.</p>
+      </div>
+      <div>
+        <div class="card p-4 border-0">
+          <h2 class="h4 mb-3">Sign in</h2>
+          <form id="loginForm">
+            <label class="form-label" for="username">Username</label>
+            <input id="username" name="username" class="form-control mb-3" autocomplete="username" required>
+            <label class="form-label" for="password">Password</label>
+            <input id="password" name="password" type="password" class="form-control mb-3" autocomplete="current-password" required>
+            <div id="loginError" class="alert alert-danger py-2 small d-none"></div>
+            <button class="btn btn-primary w-100" type="submit">Sign in</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div id="wrongDesk" class="row justify-content-center d-none">
+      <div class="col-md-7">
+        <div class="card p-4 border-0">
+          <h1 class="h4">This desk is for hostel and department authorities</h1>
+          <p class="text-muted mb-3">Campus security verifies passes at the gate. Approval stays with the hostel or department that was booked.</p>
+          <a class="btn btn-primary" href="/security">Open the security check</a>
+        </div>
+      </div>
+    </div>
+
+    <div id="dashboard" class="d-none">
+      <div class="d-flex justify-content-between align-items-end flex-wrap gap-2 mb-3">
+        <div>
+          <h1 class="h4 mb-1">In-gate passes</h1>
+          <p id="unitLine" class="text-muted small mb-0"></p>
+        </div>
+        <button id="refreshBtn" class="btn btn-outline-primary btn-sm" type="button">Refresh</button>
+      </div>
+      <div id="dashError" class="alert alert-danger py-2 small d-none"></div>
+      <div class="queue-board">
+        <section class="queue-lane lane-pending">
+          <h2 class="h6 text-uppercase">Pending <span id="countPending" class="gp-status gp-pending">0</span></h2>
+          <div id="listPending" class="d-flex flex-column gap-3"></div>
+        </section>
+        <section class="queue-lane lane-approved">
+          <h2 class="h6 text-uppercase">Approved <span id="countApproved" class="gp-status gp-approved">0</span></h2>
+          <div id="listApproved" class="d-flex flex-column gap-3"></div>
+        </section>
+        <section class="queue-lane lane-rejected">
+          <h2 class="h6 text-uppercase">Rejected <span id="countRejected" class="gp-status gp-rejected">0</span></h2>
+          <div id="listRejected" class="d-flex flex-column gap-3"></div>
+        </section>
+      </div>
+    </div>
+  </main>
+  <script src="/static/js/authority.js"></script>
+</body>
+</html>

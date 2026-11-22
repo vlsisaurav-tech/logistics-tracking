@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Security Check | LogiTrek</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/static/css/style.css" rel="stylesheet">
+</head>
+<body class="app-shell">
+  <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
+    <div class="nav-inner">
+      <a class="navbar-brand" href="/">LogiTrek</a>
+      <div class="d-flex gap-2 flex-wrap align-items-center">
+        <span id="whoami" class="small text-muted"></span>
+        <a class="btn btn-outline-secondary btn-sm" href="/authority">Approvals</a>
+        <button id="logoutBtn" class="btn btn-outline-primary btn-sm d-none" type="button">Sign out</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="page-wrap wide">
+    <div id="loginView" class="login-split">
+      <div>
+        <p class="eyebrow">Campus gate</p>
+        <h1 class="h2 mb-2">Check the pass before the barrier opens.</h1>
+        <p>Sign in, then look up the gate pass id. Pending and rejected passes stay outside.</p>
+      </div>
+      <div>
+        <div class="card p-4 border-0">
+          <h2 class="h4 mb-3">Security sign in</h2>
+          <form id="loginForm">
+            <label class="form-label" for="username">Username</label>
+            <input id="username" name="username" class="form-control mb-3" autocomplete="username" required>
+            <label class="form-label" for="password">Password</label>
+            <input id="password" name="password" type="password" class="form-control mb-3" autocomplete="current-password" required>
+            <div id="loginError" class="alert alert-danger py-2 small d-none"></div>
+            <button class="btn btn-primary w-100" type="submit">Sign in</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div id="wrongDesk" class="row justify-content-center d-none">
+      <div class="col-md-7">
+        <div class="card p-4 border-0">
+          <h1 class="h4">Security verification is a separate desk</h1>
+          <p class="text-muted mb-3">Hostel and department accounts approve their own requests. They cannot clear a truck at the gate.</p>
+          <a class="btn btn-primary" href="/authority">Back to approvals</a>
+        </div>
+      </div>
+    </div>
+
+    <div id="verifyView" class="desk-split d-none">
+      <div class="card p-4 border-0">
+        <h1 class="h4 mb-1">Verify in-gate pass</h1>
+        <p class="text-muted small">Ask for the gate pass id from the booking. A pending or rejected pass does not allow entry.</p>
+        <form id="verifyForm" class="d-flex flex-column gap-2 mt-3">
+          <input id="gatePassId" class="form-control" placeholder="GP-XXXXXXXX" autocomplete="off" required>
+          <button class="btn btn-primary" type="submit">Check</button>
+        </form>
+        <div id="verifyError" class="alert alert-danger py-2 small mt-3 mb-0 d-none"></div>
+      </div>
+      <div>
+        <div id="resultEmpty" class="empty-result">The verdict, truck number, and approving authority show up here.</div>
+        <div id="result" class="d-none"></div>
+      </div>
+    </div>
+  </main>
+  <script src="/static/js/security.js"></script>
+</body>
+</html>
